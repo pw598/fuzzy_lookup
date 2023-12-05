@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from fuzzywuzzy import fuzz
 
-df = pd.read_csv('C:/Users/patwh/OneDrive/Desktop/streamlit_apps/product_data.csv')
+df = pd.read_csv('product_data.csv')
 
 categories = [x for x in df['CATEGORY'].unique()]
 
