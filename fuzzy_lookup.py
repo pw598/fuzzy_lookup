@@ -15,14 +15,16 @@ df2 = df[df['CATEGORY'] == cat1]
 
 cat2 = st.selectbox("Subcategory", options=[x for x in df2['SUB_CATEGORY'].unique()])
 
+df3 = df2[df2['SUB_CATEGORY'] == cat2]
+
 text_input = st.text_input('Search Products')
 
-df2['SCORE'] = np.zeros(len(df2))
-df2.reset_index()
+df3['SCORE'] = np.zeros(len(df3))
+df3.reset_index()
 
-for i in range(len(df2)):
-	df2['SCORE'].iloc[i] = fuzz.ratio(df2['DESCRIPTION'].iloc[i].upper(), text_input.upper())
+for i in range(len(df3)):
+	df3['SCORE'].iloc[i] = fuzz.ratio(df3['DESCRIPTION'].iloc[i].upper(), text_input.upper())
 
-df3 = df2.drop(columns=['UPC', 'MANUFACTURER', 'PRODUCT_SIZE'])
+df4 = df3.drop(columns=['UPC', 'MANUFACTURER', 'PRODUCT_SIZE'])
 
-st.write(df3.sort_values(by='SCORE', ascending=False).head(10))
+st.write(df4.sort_values(by='SCORE', ascending=False).head(10))
